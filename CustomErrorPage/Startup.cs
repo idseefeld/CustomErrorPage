@@ -45,21 +45,26 @@ namespace CustomErrorPage
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/error");
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
             }
 
             app.UseUmbraco()
-                .WithMiddleware(u =>
-                {
-                    u.UseBackOffice();
-                    u.UseWebsite();
-                })
-                .WithEndpoints(u =>
-                {
-                    u.UseInstallerEndpoints();
-                    u.UseBackOfficeEndpoints();
-                    u.UseWebsiteEndpoints();
-                });
+            .WithMiddleware(u =>
+            {
+                u.UseBackOffice();
+                u.UseWebsite();
+            })
+            .WithEndpoints(u =>
+            {
+                u.UseInstallerEndpoints();
+                u.UseBackOfficeEndpoints();
+                u.UseWebsiteEndpoints();
+            });
         }
     }
 }
